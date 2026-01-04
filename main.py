@@ -138,6 +138,7 @@ def submit_word_guess(event=None):
     global mask, unique_chars
     wg = word_guess_var.get().strip()
     word_guess_var.set("")
+
     if len(wg) > len(word):
         return
 
@@ -148,6 +149,7 @@ def submit_word_guess(event=None):
             for i, c in enumerate(word):
                 if c == ch:
                     mask[i] = c
+
             len_label.config(text=str(mask.count("_")) + " letters remaining")
             word_label.config(text="".join(mask))
             unique_chars = [uc for uc in unique_chars if uc != ch]
