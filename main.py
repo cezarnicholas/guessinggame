@@ -166,10 +166,13 @@ def on_win():
     global has_won
     has_won = True
     win_label.pack()
+
     reveal_btn.config(state=tkinter.DISABLED)
     letter_btn.config(state=tkinter.DISABLED)
+
     guess_entry.config(state=tkinter.DISABLED)
     word_entry.config(state=tkinter.DISABLED)
+
     if has_won and not words_left:
         win_label.pack_forget()
         ultimate_winner.pack()
@@ -179,8 +182,10 @@ def reveal_word():
     global mask, unique_chars
     mask = list(word)
     unique_chars = []
+
     len_label.config(text="0 letters remaining")
     word_label.config(text=word)
+
     on_win()
 
 
@@ -198,21 +203,25 @@ def reveal_letter():
 
     len_label.config(text=str(mask.count("_")) + " letters remaining")
     word_label.config(text=str("".join(mask)))
+
     if "_" not in mask:
         on_win()
 
 
 def change_word():
+    win_label.pack_forget()
+
     global mask
     pick_word()
-
     mask = [" " if c == " " else "_" for c in word]
+
     hint_label.config(text=hint)
     len_label.config(text=str(len(word)) + " letters")
     word_label.config(text="".join(mask))
-    win_label.pack_forget()
+
     reveal_btn.config(state=tkinter.NORMAL)
     letter_btn.config(state=tkinter.NORMAL)
+
     guess_entry.config(state=tkinter.NORMAL)
     guess_entry.focus_set()
     word_entry.config(state=tkinter.NORMAL)
